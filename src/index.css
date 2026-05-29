@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --navy:        #1A2A4A;
+  --navy-light:  #2d4a7a;
+  --orange:      #E8632A;
+  --orange-dark: #c9501c;
+  --cream:       #FFF8F3;
+  --cream-dark:  #F5EDE4;
+  --border:      #E8DDD4;
+  --text-sub:    #7A6E65;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Animations ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.95) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.4); opacity: .6; }
+}
+
+.anim-fadeup   { animation: fadeUp .5s cubic-bezier(.22,.68,0,1.2) both; }
+.anim-fadein   { animation: fadeIn .4s ease both; }
+.anim-modalin  { animation: modalIn .3s cubic-bezier(.22,.68,0,1.2) both; }
+
+/* ── Spinner ────────────────────────────────── */
+.spinner {
+  width: 38px; height: 38px;
+  border: 3px solid var(--border);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin .75s linear infinite;
+}
+
+/* ── Skeleton shimmer ───────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #EDE8E3 25%, #F7F2EE 50%, #EDE8E3 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 10px;
+}
+
+/* ── Custom scrollbar ───────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #c9b8ae; }
