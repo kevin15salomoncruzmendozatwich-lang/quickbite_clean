@@ -92,7 +92,7 @@ export default function AuthModal({ mode, onClose, onSwitch, onSuccess }) {
             {!isLogin && (
               <Field label="Teléfono" required>
                 <input type="tel" value={form.telefono} onChange={e => set('telefono', e.target.value.replace(/[^0-9+\s-]/g, ''))}
-                       placeholder="+52 000 000 0000" />
+                       placeholder="+52 000 000 0000" required />
               </Field>
             )}
             <Field label="Contraseña" required>
