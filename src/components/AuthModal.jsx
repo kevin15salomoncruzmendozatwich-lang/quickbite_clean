@@ -81,7 +81,7 @@ export default function AuthModal({ mode, onClose, onSwitch, onSuccess }) {
           <form onSubmit={isLogin ? doLogin : doRegister} className="space-y-4">
             {!isLogin && (
               <Field label="Nombre completo" required>
-                <input value={form.nombre} onChange={e => set('nombre', e.target.value)}
+                <input value={form.nombre} onChange={e => set('nombre', e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]/g, ''))}
                        placeholder="Tu nombre completo" required />
               </Field>
             )}
@@ -91,7 +91,7 @@ export default function AuthModal({ mode, onClose, onSwitch, onSuccess }) {
             </Field>
             {!isLogin && (
               <Field label="Teléfono (opcional)">
-                <input type="tel" value={form.telefono} onChange={e => set('telefono', e.target.value)}
+                <input type="tel" value={form.telefono} onChange={e => set('telefono', e.target.value.replace(/[^0-9+\s-]/g, ''))}
                        placeholder="+52 000 000 0000" />
               </Field>
             )}
