@@ -114,13 +114,13 @@ export default function ReservaModal({ restaurante, onClose }) {
               {errors.nombre && <p className="text-red-500 text-xs -mt-2">{errors.nombre}</p>}
 
               {/* Teléfono */}
-              <Field label="Teléfono (opcional)">
+              <Field label="Teléfono"required>
                 <input type="tel" value={form.telefono} onChange={e => set('telefono', e.target.value.replace(/[^0-9+\s-]/g, ''))}
                        placeholder="+52 000 000 0000" />
               </Field>
 
               {/* Email */}
-              <Field label="Correo (opcional)">
+              <Field label="Correo"required>
                 <input type="email" value={form.email} onChange={e => set('email', e.target.value)}
                        placeholder="Para recibir confirmación" />
               </Field>
