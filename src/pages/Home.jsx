@@ -35,7 +35,7 @@ export default function Home() {
   useEffect(() => {
     supabase
       .from('restaurante')
-      .select('id_restaurante, nombre, direccion, telefono')
+      .select('id_restaurante, nombre, direccion, telefono, foto_url')
       .eq('estado', true)
       .order('nombre')
       .then(({ data, error }) => { if (error) console.error('QB:', error); setRestaurantes(data || []); setLoading(false) })
@@ -163,13 +163,23 @@ function RestaurantCard({ restaurante: r, index: i, onClick }) {
       style={{ animationDelay: `${i * 0.06}s` }}
     >
       {/* Cover image / gradient */}
-      <div className={`h-48 bg-gradient-to-br ${COVER_GRADIENTS[i % COVER_GRADIENTS.length]}
-                       relative flex items-center justify-center overflow-hidden`}>
-        <span className="text-7xl opacity-80 group-hover:scale-110 transition-transform duration-500">
-          {EMOJIS[i % EMOJIS.length]}
-        </span>
-        {/* Overlay shine */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+      <div className="h-48 relative flex items-center justify-center overflow-hidden">
+        {r.foto_url ? (
+          <>
+            <img src={r.foto_url} alt={r.nombre}
+                 className="absolute inset-0 w-full h-full object-cover
+                            group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          </>
+        ) : (
+          <>
+            <div className={`absolute inset-0 bg-gradient-to-br ${COVER_GRADIENTS[i % COVER_GRADIENTS.length]}`} />
+            <span className="relative text-7xl opacity-80 group-hover:scale-110 transition-transform duration-500">
+              {EMOJIS[i % EMOJIS.length]}
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          </>
+        )}
         {/* Status badge */}
         <div className="absolute top-3 right-3 bg-green-500 text-white text-[10px]
                         font-bold px-2.5 py-1 rounded-full flex items-center gap-1">

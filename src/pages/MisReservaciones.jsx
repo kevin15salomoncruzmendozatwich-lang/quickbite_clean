@@ -30,13 +30,40 @@ export default function MisReservaciones() {
 
   useEffect(() => {
     if (!user) { navigate('/'); return }
-    supabase
-      .from('reservacion')
-      .select('*, restaurante(nombre, direccion)')
-      .eq('email', user.email)
-      .order('fecha_reservacion', { ascending: false })
-      .then(({ data }) => { setReservaciones(data || []); setLoading(false) })
+
+    async function cargar() {
+      const { data } = await supabase
+        .from('reservacion')
+        .select('*, restaurante(nombre, direccion)')
+        .eq('email', user.email)
+        .order('fecha_reservacion', { ascending: false })
+      setReservaciones(data || [])
+      setLoading(false)
+    }
+
+    cargar()
+
+    // Realtime — se actualiza automáticamente al cambiar cualquier reservación
+    const channel = supabase
+      .channel('mis-reservaciones')
+      .on('postgres_changes', {
+        event: '*', schema: 'public', table: 'reservacion'
+      }, () => cargar())
+      .subscribe()
+
+    return () => supabase.removeChannel(channel)
   }, [user])
+
+  const [cancelando, setCancelando] = useState(null)
+
+  async function cancelar(idReservacion) {
+    if (!window.confirm('¿Seguro que quieres cancelar esta reservación?')) return
+    setCancelando(idReservacion)
+    await supabase.from('reservacion')
+      .update({ estado: 'cancelada' })
+      .eq('id_reservacion', idReservacion)
+    setCancelando(null)
+  }
 
   const hoy = new Date()
   const proximas  = reservaciones.filter(r => new Date(r.fecha_reservacion) >= hoy && r.estado !== 'cancelada')
@@ -151,6 +178,22 @@ export default function MisReservaciones() {
                     </div>
                   ))}
                 </div>
+                {(r.estado === 'pendiente' || r.estado === 'confirmada') && (
+                  <div className="mt-3 flex justify-end">
+                    <button
+                      onClick={() => cancelar(r.id_reservacion)}
+                      disabled={cancelando === r.id_reservacion}
+                      className="text-xs font-semibold text-red-500 hover:text-red-700
+                                 border border-red-200 hover:border-red-400 px-3 py-1.5
+                                 rounded-full transition-all duration-200 disabled:opacity-50
+                                 flex items-center gap-1.5">
+                      {cancelando === r.id_reservacion
+                        ? <span className="w-3 h-3 border-2 border-red-300 border-t-red-500 rounded-full animate-spin" />
+                        : '✕'}
+                      Cancelar reservación
+                    </button>
+                  </div>
+                )}
               </div>
             )
           })}

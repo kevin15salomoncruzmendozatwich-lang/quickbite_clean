@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../lib/AuthContext'
 import AuthModal from './AuthModal'
 
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate          = useNavigate()
+  const enLanding         = useLocation().pathname === '/'
   const [modal, setModal]       = useState(null)
   const [scrolled, setScrolled] = useState(false)
   const [dropdown, setDropdown] = useState(false)
@@ -50,6 +51,18 @@ export default function Navbar() {
             </span>
           </Link>
 
+          {/* Links */}
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+            <Link to="/#producto" className="text-navy/70 hover:text-orange transition-colors">Producto</Link>
+            <Link to="/#como-funciona" className="text-navy/70 hover:text-orange transition-colors">Cómo funciona</Link>
+            <Link to="/#casos" className="text-navy/70 hover:text-orange transition-colors">Casos de uso</Link>
+            <NavLink to="/restaurantes"
+                     className={({ isActive }) => `px-4 py-1.5 rounded-full transition-colors ${
+                       isActive ? 'bg-orange text-white' : 'bg-orange-soft text-orange hover:bg-orange hover:text-white'}`}>
+              Restaurantes
+            </NavLink>
+          </div>
+
           {/* Right */}
           <div className="flex items-center gap-3">
             {user ? (
@@ -89,12 +102,21 @@ export default function Navbar() {
                     {/* Options */}
                     <div className="py-1.5">
                       <button
+                        onClick={() => { setDropdown(false); navigate('/perfil') }}
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-navy
+                                   hover:bg-cream transition-colors text-left">
+                        <span className="text-base">📅</span>
+                        <span className="font-medium">Mi perfil</span>
+            </button>
+                      {!enLanding && (
+                      <button
                         onClick={() => { setDropdown(false); navigate('/mis-reservaciones') }}
                         className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-navy
                                    hover:bg-cream transition-colors text-left">
                         <span className="text-base">📅</span>
                         <span className="font-medium">Mis reservaciones</span>
                       </button>
+                      )}
                     </div>
 
                     <div className="border-t border-border py-1.5">

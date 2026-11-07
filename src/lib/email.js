@@ -1,8 +1,8 @@
 import emailjs from '@emailjs/browser'
 
 const SERVICE_ID  = 'service_9qrea26'
-const TEMPLATE_ID = 'template_r30jcaw'
-const PUBLIC_KEY  = 'TiYP3dDCGJ3qL3sMq'
+const TEMPLATE_ID = 'template_XXXXXXX' // <- reemplaza con tu template ID real (no el de prueba)
+const PUBLIC_KEY  = 'jIhQxbg-6rYV7wV5x'
 
 emailjs.init(PUBLIC_KEY)
 
