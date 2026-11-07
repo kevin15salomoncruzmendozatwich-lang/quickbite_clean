@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
@@ -17,15 +19,13 @@ export default function Footer() {
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             {[
-              'Política de privacidad',
-              'Términos de uso',
-              'Cookies',
-              'Accesibilidad',
-            ].map(link => (
-              <a key={link} href="#"
-                 className="text-white/70 hover:text-orange text-sm transition-colors font-medium">
-                {link}
-              </a>
+              ['Política de privacidad', '/privacidad'],
+              ['Términos de uso', '/terminos'],
+            ].map(([label, to]) => (
+              <Link key={to} to={to}
+                    className="text-white/70 hover:text-orange text-sm transition-colors font-medium">
+                {label}
+              </Link>
             ))}
           </div>
         </div>

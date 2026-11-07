@@ -23,6 +23,7 @@ const APPS = [
   {
     Icon: MonitorIcon,
     title: 'App de escritorio',
+    img: 'https://i.imgur.com/DCsKpRs.png', // ← pon aquí tu link
     desc: 'El centro de tu restaurante: comandas en tiempo real, ticket PDF, reservaciones, menú, promociones, zonas y fotos, todo desde un solo lugar.',
     // Bento: tarjeta principal, grande a la izquierda
     span: 'md:col-span-2 md:row-span-2',
@@ -32,6 +33,7 @@ const APPS = [
   {
     Icon: TabletIcon,
     title: 'App Android para tablet',
+    img: 'https://i.imgur.com/F6ZxWHI.jpeg', // ← pon aquí tu link
     desc: 'Tus clientes piden desde la mesa: menú con fotos, promociones, notas por platillo y seguimiento del pedido en vivo.',
     span: '',
     mediaH: 'h-36',
@@ -39,6 +41,7 @@ const APPS = [
   {
     Icon: GlobeIcon,
     title: 'Portal web',
+    img: 'https://i.imgur.com/ku5HOBx.png', // ← pon aquí tu link
     desc: 'Esta misma página muestra a los restaurantes afiliados: los comensales los descubren, leen reseñas y reservan con confirmación por correo.',
     span: '',
     mediaH: 'h-36',
@@ -80,7 +83,7 @@ export default function AppsBento() {
 
       {/* Bento grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6">
-        {APPS.map(({ Icon: Ico, title, desc, span, mediaH, big, to }, i) => (
+        {APPS.map(({ Icon: Ico, title, desc, img, span, mediaH, big, to }, i) => (
           // Wrapper: animación de entrada escalonada (stagger)
           <div key={title}
                style={{ transitionDelay: visible ? `${i * 150}ms` : '0ms' }}
@@ -98,11 +101,14 @@ export default function AppsBento() {
               <div className={`relative ${mediaH} m-3 mb-0 rounded-2xl overflow-hidden
                                bg-gradient-to-br from-cream to-orange-soft
                                border border-border/50 flex items-center justify-center`}>
-                <div className="absolute inset-0 opacity-[0.35]
-                                bg-[radial-gradient(circle_at_30%_20%,rgba(232,99,42,.25),transparent_55%)]" />
-                <div className="relative text-orange transition-transform duration-300 ease-out group-hover:scale-110">
-                  <Ico />
-                </div>
+                {img ? (
+                  <img src={img} alt={title} loading="lazy"
+                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
+                ) : (
+                  <div className="relative text-orange transition-transform duration-300 ease-out group-hover:scale-110">
+                    <Ico />
+                  </div>
+                )}
               </div>
 
               <div className={`flex flex-col flex-1 ${big ? 'p-8' : 'p-6'}`}>

@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Landing from './pages/Landing'
+import Legal from './pages/Legal'
 import Home from './pages/Home'
 import Restaurant from './pages/Restaurant'
 import MisReservaciones from './pages/MisReservaciones'
@@ -15,6 +16,8 @@ export default function App() {
       <div className="flex-1">
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/terminos" element={<Legal tipo="terminos" />} />
+          <Route path="/privacidad" element={<Legal tipo="privacidad" />} />
           <Route path="/restaurantes" element={<Home />} />
           <Route path="/restaurante/:id" element={<Restaurant />} />
           <Route path="/mis-reservaciones" element={<MisReservaciones />} />
