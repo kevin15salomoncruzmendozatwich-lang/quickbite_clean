@@ -42,10 +42,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 no-underline group">
-            <div className="w-9 h-9 bg-navy rounded-xl flex items-center justify-center
-                            group-hover:bg-orange transition-colors duration-200 shadow-sm">
-              <span className="text-lg">🍔</span>
-            </div>
+            <img src="/logo.png" alt="QuickBite" className="h-10 w-auto rounded-xl shadow-sm transition-transform duration-200 group-hover:scale-105" />
             <span className="font-playfair font-bold text-xl text-navy tracking-tight">
               Quick<span className="text-orange">Bite</span>
             </span>

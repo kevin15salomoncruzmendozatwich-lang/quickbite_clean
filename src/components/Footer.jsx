@@ -8,9 +8,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
           {/* Logo */}
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-orange rounded-xl flex items-center justify-center">
-              <span className="text-lg">🍔</span>
-            </div>
+            <img src="/logo.png" alt="QuickBite" className="h-10 w-auto rounded-xl shadow-sm transition-transform duration-200 group-hover:scale-105" />
             <span className="font-playfair font-bold text-xl text-white">
               Quick<span className="text-orange">Bite</span>
             </span>
