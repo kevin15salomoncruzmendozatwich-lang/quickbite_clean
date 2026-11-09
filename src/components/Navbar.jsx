@@ -49,10 +49,12 @@ export default function Navbar() {
           </Link>
 
           {/* Links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <div className="hidden lg:flex items-center gap-6 text-sm font-medium">
             <Link to="/#producto" className="text-navy/70 hover:text-orange transition-colors">Producto</Link>
             <Link to="/#como-funciona" className="text-navy/70 hover:text-orange transition-colors">Cómo funciona</Link>
             <Link to="/#casos" className="text-navy/70 hover:text-orange transition-colors">Casos de uso</Link>
+            <NavLink to="/prueba" className={({ isActive }) => `transition-colors ${isActive ? 'text-orange' : 'text-navy/70 hover:text-orange'}`}>Prueba gratis</NavLink>
+            <NavLink to="/software" className={({ isActive }) => `transition-colors ${isActive ? 'text-orange' : 'text-navy/70 hover:text-orange'}`}>Software</NavLink>
             <NavLink to="/restaurantes"
                      className={({ isActive }) => `px-4 py-1.5 rounded-full transition-colors ${
                        isActive ? 'bg-orange text-white' : 'bg-orange-soft text-orange hover:bg-orange hover:text-white'}`}>

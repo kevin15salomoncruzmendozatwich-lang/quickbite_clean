@@ -43,9 +43,9 @@ export default function Landing() {
               <Link to="/restaurantes" className="bg-orange hover:bg-orange-dark text-white font-bold px-7 py-3.5 rounded-full transition-all hover:-translate-y-0.5">
                 Ver restaurantes que lo usan →
               </Link>
-              <a href="#como-funciona" className="border border-white/30 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white/10 transition-colors">
-                Cómo funciona
-              </a>
+              <Link to="/prueba" className="border border-white/30 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white/10 transition-colors">
+                Probar gratis 1 hora
+              </Link>
             </div>
           </div>
 

@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Landing from './pages/Landing'
+import Prueba from './pages/Prueba'
+import Software from './pages/Software'
 import Legal from './pages/Legal'
 import Home from './pages/Home'
 import Restaurant from './pages/Restaurant'
@@ -16,6 +18,8 @@ export default function App() {
       <div className="flex-1">
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/prueba" element={<Prueba />} />
+          <Route path="/software" element={<Software />} />
           <Route path="/terminos" element={<Legal tipo="terminos" />} />
           <Route path="/privacidad" element={<Legal tipo="privacidad" />} />
           <Route path="/restaurantes" element={<Home />} />

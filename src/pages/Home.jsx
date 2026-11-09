@@ -37,6 +37,7 @@ export default function Home() {
       .from('restaurante')
       .select('id_restaurante, nombre, direccion, telefono, foto_url')
       .eq('estado', true)
+      .eq('es_demo', false)
       .order('nombre')
       .then(({ data, error }) => { if (error) console.error('QB:', error); setRestaurantes(data || []); setLoading(false) })
   }, [])
